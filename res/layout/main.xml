@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="435dp"
+            android:id="@+id/textFieldInput"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="179dp"
+            android:layout_weight="0.77"/>
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scream"
+            android:id="@+id/buttonScream"
+            android:layout_gravity="center_horizontal"/>
+</LinearLayout>
+
