@@ -1,23 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-        >
+              android:rowCount="2"
+              android:columnCount="1">
 
-    <EditText
+    <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="435dp"
-            android:id="@+id/textFieldInput"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="179dp"
-            android:layout_weight="0.77"/>
+            android:layout_height="395dp">
 
-    <Button
-            android:layout_width="wrap_content"
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/textFieldInput"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="179dp"
+                android:layout_weight="0.77"
+                android:textColor="#000000"
+                android:singleLine="true"
+                android:imeOptions="actionDone"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Scream"
-            android:id="@+id/buttonScream"
-            android:layout_gravity="center_horizontal"/>
-</LinearLayout>
+            android:layout_gravity="center">
+
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="Scream"
+                android:id="@+id/buttonScream"
+                />
+    </LinearLayout>
+
+</GridLayout>
 

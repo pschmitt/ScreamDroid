@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ScreamDroid</string>
+    <string name="input_text">ScreamThisShit</string>
+    <string name="log_error">Error</string>
 </resources>
