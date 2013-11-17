@@ -3,8 +3,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/action_scream"
           android:title="@string/menu_scream"
+          android:icon="@drawable/fullscreen"
           android:showAsAction="always" />
     <item android:id="@+id/action_settings"
+          android:icon="@drawable/settings"
           android:title="@string/menu_settings"
           android:showAsAction="always"/>
 </menu>
