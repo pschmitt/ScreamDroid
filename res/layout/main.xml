@@ -9,5 +9,6 @@
                 android:id="@+id/textFieldInput"
                 android:singleLine="true"
                 android:imeOptions="actionDone"
-                android:textSize="40dp"/>
+                android:hint="@string/shout_hint"
+                android:textSize="40sp"/>
     </LinearLayout>

@@ -4,9 +4,9 @@
     <item android:id="@+id/action_scream"
           android:title="@string/menu_scream"
           android:icon="@drawable/fullscreen"
-          android:showAsAction="always" />
+          android:showAsAction="ifRoom" />
     <item android:id="@+id/action_settings"
           android:icon="@drawable/settings"
           android:title="@string/menu_settings"
-          android:showAsAction="always"/>
+          android:showAsAction="ifRoom"/>
 </menu>

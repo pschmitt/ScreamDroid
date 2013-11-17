@@ -16,18 +16,18 @@
 
         <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="foobar"
+                android:text="@string/textView_default"
                 android:id="@+id/textScream"
                 android:layout_gravity="center_horizontal"
-                android:textSize="200dp"/>
+                android:textSize="200sp"/>
     </ScrollView>
 
     <Button
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:text="EDIT"
+            android:text="@string/edit_button"
             android:id="@+id/buttonRedo"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"/>
