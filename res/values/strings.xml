@@ -9,4 +9,6 @@
     <string name="pref_erase_summ">Reset input when selecting edit</string>
     <string name="pref_upper_case">Shout</string>
     <string name="pref_upper_case_summ">Convert to uppercase</string>
+    <string name="pref_force_landscape">Force landscape</string>
+    <string name="pref_force_landscape_summ">Force landscape mode when shouting</string>
 </resources>

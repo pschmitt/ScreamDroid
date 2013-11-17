@@ -11,4 +11,9 @@
             android:title="@string/pref_upper_case"
             android:summary="@string/pref_upper_case_summ"
             android:defaultValue="false" />
+    <CheckBoxPreference
+            android:key="@string/pref_force_landscape"
+            android:title="@string/pref_force_landscape"
+            android:summary="@string/pref_force_landscape_summ"
+            android:defaultValue="false" />
 </PreferenceScreen>

@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     scream();
+                    Log.d("TAG", "test");
                     return true;
                 }
                 return false;
@@ -75,7 +76,9 @@ public class MainActivity extends Activity {
 
     private void scream() {
         try {
-            String text = mEDitTExtInput.getText().toString();
+            String text = "defaultText";
+            if (mEDitTExtInput.getText() != null)
+                text = mEDitTExtInput.getText().toString();
             Intent screamIntent = new Intent(this, ScreamActivity.class);
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
             if (sharedPref.getBoolean(getString(R.string.pref_upper_case), false)) {
