@@ -4,4 +4,7 @@
     <item android:id="@+id/action_scream"
           android:title="@string/menu_scream"
           android:showAsAction="always" />
+    <item android:id="@+id/action_settings"
+          android:title="@string/menu_settings"
+          android:showAsAction="always"/>
 </menu>

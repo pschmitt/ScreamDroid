@@ -2,7 +2,9 @@ package io.lxl.ScreamDroid;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -46,6 +48,9 @@ public class MainActivity extends Activity {
             case R.id.action_scream:
                 scream();
                 break;
+            case R.id.action_settings:
+                settings();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -60,9 +65,12 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onResume() {
-         super.onResume();
-         mEDitTExtInput.setText("");
-         mEDitTExtInput.requestFocus();
+        super.onResume();
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sharedPref.getBoolean(getString(R.string.pref_erase), true)) {
+            mEDitTExtInput.setText("");
+        }
+        mEDitTExtInput.requestFocus();
     }
 
     private void scream() {
@@ -74,6 +82,10 @@ public class MainActivity extends Activity {
         } catch (NullPointerException e) {
             Log.e(getString(R.string.log_error), "EditText.getText == NULL !");
         }
+    }
+
+    private void settings() {
+        startActivity(new Intent(this, SettingsActivity.class));
     }
 
 }
