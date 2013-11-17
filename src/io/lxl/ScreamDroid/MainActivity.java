@@ -77,6 +77,10 @@ public class MainActivity extends Activity {
         try {
             String text = mEDitTExtInput.getText().toString();
             Intent screamIntent = new Intent(this, ScreamActivity.class);
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+            if (sharedPref.getBoolean(getString(R.string.pref_upper_case), false)) {
+                text = text.toUpperCase();
+            }
             screamIntent.putExtra(getString(R.string.input_text), text);
             startActivity(screamIntent);
         } catch (NullPointerException e) {

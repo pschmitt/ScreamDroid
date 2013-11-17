@@ -6,4 +6,9 @@
             android:title="@string/pref_erase"
             android:summary="@string/pref_erase_summ"
             android:defaultValue="true" />
+    <CheckBoxPreference
+            android:key="@string/pref_upper_case"
+            android:title="@string/pref_upper_case"
+            android:summary="@string/pref_upper_case_summ"
+            android:defaultValue="false" />
 </PreferenceScreen>
