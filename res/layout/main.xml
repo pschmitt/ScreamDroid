@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-        >
-
-    <TableRow
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
         <EditText
                 android:layout_width="fill_parent"
-                android:layout_height="200dp"
+                android:layout_height="fill_parent"
                 android:id="@+id/textFieldInput"
-                android:layout_gravity="center|bottom"
-                android:layout_weight="0.77"
-                android:textColor="#000000"
                 android:singleLine="true"
-                android:imeOptions="actionDone"/>
-    </TableRow>
-</TableLayout>
-
+                android:imeOptions="actionDone"
+                android:textSize="40dp"/>
+    </LinearLayout>
