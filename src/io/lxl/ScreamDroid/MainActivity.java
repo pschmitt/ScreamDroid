@@ -5,9 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -18,7 +19,6 @@ public class MainActivity extends Activity {
      * Called when the activity is first created.
      */
 
-    private Button mScreamButton;
     private EditText mEDitTExtInput;
 
     @Override
@@ -26,15 +26,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        mScreamButton = (Button) findViewById(R.id.buttonScream);
         mEDitTExtInput = (EditText) findViewById(R.id.textFieldInput);
-
-        mScreamButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scream();
-            }
-        });
         mEDitTExtInput.setImeOptions(EditorInfo.IME_ACTION_DONE);
         mEDitTExtInput.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
@@ -46,6 +38,24 @@ public class MainActivity extends Activity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_scream:
+                scream();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_activity_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+
     }
 
     @Override
