@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_key_discard_input">discard_input</string>
+    <string name="pref_discard_input">Discard input</string>
+    <string name="pref_discard_input_summ">Discard input when returning to main</string>
+
+    <string name="pref_key_upper_case">upper_case</string>
+    <string name="pref_upper_case">Shout</string>
+    <string name="pref_upper_case_summ">Convert to uppercase</string>
+
+    <string name="pref_key_force_landscape">force_landscape</string>
+    <string name="pref_force_landscape">Force landscape</string>
+    <string name="pref_force_landscape_summ">Force landscape mode when shouting</string>
+
+    <string name="pref_key_hide_actionbar">hide_actionbar</string>
+    <string name="pref_hide_actionbar">Hide ActionBar</string>
+    <string name="pref_hide_actionbar_summ">Hide ActionBar in scream mode</string>
+    <string name="pref_cat_input">Input</string>
+    <string name="pref_cat_user_input">User Interface</string>
+    <string name="pref_key_hide_back_button">hide_back_button</string>
+    <string name="pref_hide_back_button">Hide back button</string>
+    <string name="pref_hide_back_button_summ">Hide back button in scream mode</string>
+</resources>
