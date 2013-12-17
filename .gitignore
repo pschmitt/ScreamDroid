@@ -26,10 +26,7 @@ proguard/
 *.iml
 *.ipr
 *.iws
-.idea
-*.ipr
-*.iws
 .idea/
-adb.log
-/build
+
+# gradle
 .gradle
