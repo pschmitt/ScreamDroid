@@ -15,5 +15,7 @@
     <string name="title_activity_snippets">SnippetsActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="drawer_icon_desc">Icon</string>
+    <string name="toast_no_input">Please enter some text first</string>
+    <string name="txt_preview">Preview</string>
 
 </resources>

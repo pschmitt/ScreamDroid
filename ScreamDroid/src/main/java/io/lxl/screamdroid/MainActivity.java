@@ -2,33 +2,30 @@ package io.lxl.screamdroid;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, TextInputFragment.OnTextUpdatedListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
-
+    private TextInputFragment mTextInputFragment;
+    private PreviewFragment mPreviewFragment;
     private boolean mNaviFirstHit = false;
+    private boolean mIsEditTextShow = true;
+    private String mScreamText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +39,12 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        mTextInputFragment = new TextInputFragment();
+        mPreviewFragment = new PreviewFragment();
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, new PlaceholderFragment())
+                .replace(R.id.container, mTextInputFragment)
                 .commit();
     }
 
@@ -86,6 +85,18 @@ public class MainActivity extends ActionBarActivity
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -95,26 +106,47 @@ public class MainActivity extends ActionBarActivity
             case R.id.action_scream:
                 scream();
                 return true;
+            case R.id.action_preview:
+                togglePreview();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void scream() {
+    private String processString(String input) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sharedPref.getBoolean(getString(R.string.pref_key_upper_case), false)) {
+            input = input.toUpperCase();
+        }
+        return input;
+    }
+
+    private void togglePreview() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (mIsEditTextShow) {
+            fragmentManager.beginTransaction()
+                .replace(R.id.container, mPreviewFragment)
+                .commit();
+            if (mPreviewFragment != null)
+                mPreviewFragment.updatePreviewText(processString(mScreamText));
+        } else {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, mTextInputFragment)
+                    .commit();
+        }
+        mIsEditTextShow = !mIsEditTextShow;
+    }
+
+    public void scream() {
         try {
             String text = "defaultText";
             EditText screamInput = (EditText)findViewById(R.id.input_scream);
             if (screamInput.getText() != null)
-                text = screamInput.getText().toString();
+                text = processString(screamInput.getText().toString());
             Intent screamIntent = new Intent(this, ScreamActivity.class);
-            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-            if (sharedPref.getBoolean(getString(R.string.pref_key_upper_case), false)) {
-                text = text.toUpperCase();
-            }
-            if (text.isEmpty()) {
-                // TODO Error handling
-                Toast.makeText(this, "Please enter some text first", Toast.LENGTH_SHORT).show();
+            if (text == null || text.length() == 0) {
+                Toast.makeText(this, getString(R.string.toast_no_input), Toast.LENGTH_SHORT).show();
             } else {
-                // text = getString(R.string.lorem_ipsorum);
                 screamIntent.putExtra(getString(R.string.extra_scream_text), text);
                 startActivity(screamIntent);
             }
@@ -123,46 +155,10 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private EditText mScreamInput;
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            mScreamInput = (EditText) rootView.findViewById(R.id.input_scream);
-            mScreamInput.setImeOptions(EditorInfo.IME_ACTION_DONE);
-            mScreamInput.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-                @Override
-                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                    if (actionId == EditorInfo.IME_ACTION_DONE) {
-                        ((MainActivity) getActivity()).scream();
-                        return true;
-                    }
-                    return false;
-                }
-            });
-            return rootView;
-        }
-
-        @Override
-        public void onResume() {
-            super.onResume();
-            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            if (sharedPref.getBoolean(getString(R.string.pref_key_discard_input), false)) {
-                mScreamInput.setText("");
-            }
-        }
+    @Override
+    public void onTextUpdated(String newText) {
+        mScreamText = newText;
+        //if (mPreviewFragment != null)
+        //    mPreviewFragment.updatePreviewText(processString(newText));
     }
-
 }
