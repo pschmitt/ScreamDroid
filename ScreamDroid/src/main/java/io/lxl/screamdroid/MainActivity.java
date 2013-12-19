@@ -1,8 +1,8 @@
 package io.lxl.screamdroid;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
@@ -11,7 +11,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity
@@ -25,6 +25,7 @@ public class MainActivity extends ActionBarActivity
     private PreviewFragment mPreviewFragment;
     private boolean mNaviFirstHit = false;
     private boolean mIsEditTextShow = true;
+    private Menu mActionBarMenu;
     private String mScreamText;
 
     @Override
@@ -78,22 +79,16 @@ public class MainActivity extends ActionBarActivity
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.main, menu);
+            mActionBarMenu = menu;
+            MenuItem previewItem = menu.findItem(R.id.action_preview);
+            if (mIsEditTextShow)
+                previewItem.setTitle(getString(R.string.action_edit_txt));
+            else
+                previewItem.setTitle(getString(R.string.action_preview_txt));
             //restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override
@@ -108,6 +103,7 @@ public class MainActivity extends ActionBarActivity
                 return true;
             case R.id.action_preview:
                 togglePreview();
+                supportInvalidateOptionsMenu();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -125,29 +121,32 @@ public class MainActivity extends ActionBarActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (mIsEditTextShow) {
             fragmentManager.beginTransaction()
-                .replace(R.id.container, mPreviewFragment)
-                .commit();
+                    .replace(R.id.container, mPreviewFragment)
+                    .commit();
             if (mPreviewFragment != null)
                 mPreviewFragment.updatePreviewText(processString(mScreamText));
+            // hide keyboard
+            InputMethodManager inputManager = (InputMethodManager)
+                    this.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
         } else {
             fragmentManager.beginTransaction()
                     .replace(R.id.container, mTextInputFragment)
                     .commit();
+            // TODO show keyboard
         }
         mIsEditTextShow = !mIsEditTextShow;
     }
 
     public void scream() {
         try {
-            String text = "defaultText";
-            EditText screamInput = (EditText)findViewById(R.id.input_scream);
-            if (screamInput.getText() != null)
-                text = processString(screamInput.getText().toString());
+            mScreamText = processString(mScreamText);
             Intent screamIntent = new Intent(this, ScreamActivity.class);
-            if (text == null || text.length() == 0) {
+            if (mScreamText == null || mScreamText.length() == 0) {
                 Toast.makeText(this, getString(R.string.toast_no_input), Toast.LENGTH_SHORT).show();
             } else {
-                screamIntent.putExtra(getString(R.string.extra_scream_text), text);
+                screamIntent.putExtra(getString(R.string.extra_scream_text), mScreamText);
                 startActivity(screamIntent);
             }
         } catch (NullPointerException e) {

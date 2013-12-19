@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.lxl.screamdroid"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0">
 
     <uses-sdk
         android:minSdkVersion="7"
@@ -12,11 +12,10 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name="io.lxl.screamdroid.MainActivity"
-            android:label="@string/app_name"
-            android:configChanges="orientation">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +24,7 @@
         </activity>
         <activity
             android:name="io.lxl.screamdroid.ScreamActivity"
-            android:label="@string/title_activity_scream" >
+            android:label="@string/title_activity_scream">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -33,22 +32,23 @@
         <activity
             android:name="io.lxl.screamdroid.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName="io.lxl.screamdroid.MainActivity" >
+            android:parentActivityName="io.lxl.screamdroid.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="io.lxl.screamdroid.MainActivity" />
         </activity>
         <activity
             android:name="io.lxl.screamdroid.AboutActivity"
-            android:label="@string/title_activity_about" >
+            android:label="@string/title_activity_about">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="io.lxl.screamdroid.MainActivity" />
         </activity>
         <activity
             android:name="io.lxl.screamdroid.SnippetsActivity"
-            android:label="@string/title_activity_snippets" >
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
+            android:label="@string/title_activity_snippets">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
                 android:value="io.lxl.screamdroid.MainActivity" />
         </activity>
     </application>

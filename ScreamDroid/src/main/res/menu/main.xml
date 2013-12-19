@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity" >
     <item android:id="@+id/action_preview"
-        android:title="Preview"
+        android:title="@string/action_preview_txt"
         app:showAsAction="ifRoom|withText"/>
     <item android:id="@+id/action_scream"
         android:title="@string/action_scream"

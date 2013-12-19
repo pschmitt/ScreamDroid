@@ -17,5 +17,7 @@
     <string name="drawer_icon_desc">Icon</string>
     <string name="toast_no_input">Please enter some text first</string>
     <string name="txt_preview">Preview</string>
+    <string name="action_preview_txt">Preview</string>
+    <string name="action_edit_txt">Edit</string>
 
 </resources>
