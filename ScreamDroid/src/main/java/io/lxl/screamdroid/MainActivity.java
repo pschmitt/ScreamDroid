@@ -26,7 +26,7 @@ public class MainActivity extends ActionBarActivity
     private boolean mNaviFirstHit = false;
     private boolean mIsEditTextShow = true;
     private Menu mActionBarMenu;
-    private String mScreamText;
+    private String mScreamText = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,9 +82,9 @@ public class MainActivity extends ActionBarActivity
             mActionBarMenu = menu;
             MenuItem previewItem = menu.findItem(R.id.action_preview);
             if (mIsEditTextShow)
-                previewItem.setTitle(getString(R.string.action_edit_txt));
-            else
                 previewItem.setTitle(getString(R.string.action_preview_txt));
+            else
+                previewItem.setTitle(getString(R.string.action_edit_txt));
             //restoreActionBar();
             return true;
         }
